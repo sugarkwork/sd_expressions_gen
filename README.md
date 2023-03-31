@@ -2,7 +2,7 @@
 
 This script automatically generates multiple facial expressions for a character by executing the API of the Stable Diffusion Web UI.
 
-Now it's just a single script that hits the API of the Web UI.
+Right now, it's just a matter of calling the API of the Web UI from the script.
 I would like to implement it as an extension of the Stable Diffusion Web UI in the future.
 
 Install the required modules as follows:
