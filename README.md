@@ -40,7 +40,7 @@ Define the base_prompt variable to specify the fundamental prompt for the charac
 
 All information such as the step number is stored in the payload variable.
 
-A list of expressions is defined in the expressions variable.
+A list of facial expressions is defined in the "expressions" variable.
 If there are unnecessary facial expressions, you can delete or add them.
 The key will be the filename and the value will be the actual prompt.
 
