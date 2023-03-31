@@ -52,3 +52,7 @@ This code functions as follows.
 4. Feed the blurred image into ControlNet and perform i2i to change the expression prompt.
 
 If you prepare a pose image (cn.png) for ControlNet and a face mask (mask.png), you can easily create a standing image that can be used in the game.
+
+## facial expressions sample
+
+https://ai.sugar-knight.com/aitest/ex.html
