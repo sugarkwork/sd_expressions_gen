@@ -5,13 +5,8 @@ This script automatically generates multiple facial expressions for a character 
 Right now, it's just a matter of calling the API of the Web UI from the script.
 I would like to implement it as an extension of the Stable Diffusion Web UI in the future.
 
-Install the required modules as follows:
 
-```
-pip install requests pillow
-```
-
-To configure Stable Diffusion Web UI, edit the webui-user.bat file and specify/add "--api" to the COMMANDLINE_ARGS.
+To configure Stable Diffusion Web UI, edit the "webui-user.bat" file and specify/add "--api" to the COMMANDLINE_ARGS.
 ```
 @echo off
 
@@ -23,6 +18,20 @@ call webui.bat
 ```
 
 Launching StableDiffusion.
+
+Open a command line.
+Install the required modules as follows:
+
+```
+pip install requests pillow
+```
+
+git clone.
+
+```
+git clone https://github.com/sugarkwork/sd_expressions_gen
+cd sd_expressions_gen
+```
 
 When you run the script, it automatically starts writing a character using the StableDiffusion API.
 It saves a file for each facial expression of the character.
@@ -73,6 +82,37 @@ https://ai.sugar-knight.com/aitest/ex.html
 Using ChatGPT, I asked them to come up with lines that sounded like that.
 The HTML was also made by ChatGPT.
 
+## a list of currently defined facial expressions
+
+ - smile
+ - crazy
+ - sleepy
+ - painful
+ - endure pain
+ - evil smile
+ - heart
+ - angry
+ - happy
+ - sad
+ - crying
+ - bawl
+ - confused
+ - scared
+ - surprised
+ - laughing
+ - closed eyes
+ - half-closed eyes
+ - excitement
+ - shy
+ - shouting
+ - kiss
+ - ahegao soft
+ - ahegao hard
+ - ahegao with heart
+ - wink
+ - get drunk
+
+
 ## why did i make this
 If we were to create a game in which AI dynamically prepares scenarios and character images, we thought it would be better to automatically generate the character's facial expressions. We verified the implementation of character facial expressions using only the API without going through the Web UI.
 
@@ -81,3 +121,4 @@ If we were to create a game in which AI dynamically prepares scenarios and chara
  - Create a costume change sample.
  - Make it an extension of the web UI.
  - Randomly select an image to use for ControlNet.
+ - Switch API. Web UI API deprecates /controlnet/txt2img. But in my environment ControlNet with /sdapi/v1/txt2img did not work.
