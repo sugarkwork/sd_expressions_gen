@@ -48,8 +48,18 @@ The key will be the filename and the value will be the actual prompt.
 This code functions as follows.
 1. Load the image to be set as the input for ControlNet.
 2. Generate a character based on the specified prompt.
-3. Blur the face of the generated character according to the mask.png.
-4. Feed the blurred image into ControlNet and perform i2i to change the expression prompt.
+
+![expressionless](https://user-images.githubusercontent.com/98699377/229041913-63d2da6a-4813-4d28-9c73-c05a6a817f59.png)
+
+4. Blur the face of the generated character according to the mask.png.
+
+![br](https://user-images.githubusercontent.com/98699377/229041924-2c6aea6d-0045-4822-b552-0f8eb94bfe66.png)
+
+5. Feed the blurred image into ControlNet and perform i2i to change the expression prompt.
+
+![smile](https://user-images.githubusercontent.com/98699377/229041920-aee011e5-e6dc-439f-8c92-74d084862eec.png)
+
+
 
 If you prepare a pose image (cn.png) for ControlNet and a face mask (mask.png), you can easily create a standing image that can be used in the game.
 
