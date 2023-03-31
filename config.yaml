@@ -1,0 +1,5 @@
+base_url: "http://127.0.0.1:7860"
+sd_model: "anythingV5Anything_anythingV5PrtRE.safetensors"
+openpose_model: "control_sd15_openpose [fef5e48e]"
+i2i_model: "control_sd15_canny [fef5e48e]"
+output_dir: "./output"
