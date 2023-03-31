@@ -5,13 +5,8 @@ This script automatically generates multiple facial expressions for a character 
 Right now, it's just a matter of calling the API of the Web UI from the script.
 I would like to implement it as an extension of the Stable Diffusion Web UI in the future.
 
-Install the required modules as follows:
 
-```
-pip install requests pillow
-```
-
-To configure Stable Diffusion Web UI, edit the webui-user.bat file and specify/add "--api" to the COMMANDLINE_ARGS.
+To configure Stable Diffusion Web UI, edit the "webui-user.bat" file and specify/add "--api" to the COMMANDLINE_ARGS.
 ```
 @echo off
 
@@ -23,6 +18,20 @@ call webui.bat
 ```
 
 Launching StableDiffusion.
+
+Open a command line.
+Install the required modules as follows:
+
+```
+pip install requests pillow
+```
+
+git clone.
+
+```
+git clone https://github.com/sugarkwork/sd_expressions_gen
+cd sd_expressions_gen
+```
 
 When you run the script, it automatically starts writing a character using the StableDiffusion API.
 It saves a file for each facial expression of the character.
