@@ -83,7 +83,7 @@ class FaceGenerator:
 def main():
     base_prompt = ", 1girl, tareme, blonde hair, ponytail, blue eyes, masterpiece, high quality, cute, "\
                   "highres, delicate, beautiful detailed, finely detailed, front light, " \
-                  "white background, standing, sfw, looking at viewer, (upper body:1.1), <lora:rykd:0.2>"
+                  "white background, standing, sfw, looking at viewer, (upper body:1.1)"
     face_generator = FaceGenerator(base_prompt=base_prompt)
     new_img = face_generator.generate_face("expressionless")
     new_img.save("expressionless.png")
