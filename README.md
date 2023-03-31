@@ -73,6 +73,37 @@ https://ai.sugar-knight.com/aitest/ex.html
 Using ChatGPT, I asked them to come up with lines that sounded like that.
 The HTML was also made by ChatGPT.
 
+## a list of currently defined facial expressions
+
+ - smile
+ - crazy
+ - sleepy
+ - painful
+ - endure pain
+ - evil smile
+ - heart
+ - angry
+ - happy
+ - sad
+ - crying
+ - bawl
+ - confused
+ - scared
+ - surprised
+ - laughing
+ - closed eyes
+ - half-closed eyes
+ - excitement
+ - shy
+ - shouting
+ - kiss
+ - ahegao soft
+ - ahegao hard
+ - ahegao with heart
+ - wink
+ - get drunk
+
+
 ## why did i make this
 If we were to create a game in which AI dynamically prepares scenarios and character images, we thought it would be better to automatically generate the character's facial expressions. We verified the implementation of character facial expressions using only the API without going through the Web UI.
 
