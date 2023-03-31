@@ -70,6 +70,9 @@ If you prepare a pose image (cn.png) for ControlNet and a face mask (mask.png), 
 
 https://ai.sugar-knight.com/aitest/ex.html
 
+Using ChatGPT, I asked them to come up with lines that sounded like that.
+The HTML was also made by ChatGPT.
+
 ## why did i make this
 If we were to create a game in which AI dynamically prepares scenarios and character images, we thought it would be better to automatically generate the character's facial expressions. We verified the implementation of character facial expressions using only the API without going through the Web UI.
 
