@@ -59,7 +59,7 @@ This code functions as follows.
 
 ![smile](https://user-images.githubusercontent.com/98699377/229041920-aee011e5-e6dc-439f-8c92-74d084862eec.png)
 
-
+Repeats the process for the number of expressions defined in the "expressions" variable.
 
 If you prepare a pose image (cn.png) for ControlNet and a face mask (mask.png), you can easily create a standing image that can be used in the game.
 
