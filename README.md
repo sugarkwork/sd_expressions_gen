@@ -81,3 +81,4 @@ If we were to create a game in which AI dynamically prepares scenarios and chara
  - Create a costume change sample.
  - Make it an extension of the web UI.
  - Randomly select an image to use for ControlNet.
+ - Switch API. Web UI API deprecates /controlnet/txt2img. But in my environment ControlNet with /sdapi/v1/txt2img did not work.
