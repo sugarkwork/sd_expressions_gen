@@ -19,8 +19,14 @@ set COMMANDLINE_ARGS=--api
 call webui.bat
 ```
 
+Launching StableDiffusion.
+
 When you run the script, it automatically starts writing a character using the StableDiffusion API.
 It saves a file for each facial expression of the character.
+
+```
+python expressions_gen.py
+```
 
 ## code
 
