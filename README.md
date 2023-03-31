@@ -46,7 +46,7 @@ The key will be the filename and the value will be the actual prompt.
 
 ## process
 This code functions as follows.
-1. Load the image to be set as the input for ControlNet.
+1. Load the image (cn.png) to be set as the input for ControlNet.
 2. Generate a character based on the specified prompt.
 
 ![expressionless](https://user-images.githubusercontent.com/98699377/229041913-63d2da6a-4813-4d28-9c73-c05a6a817f59.png)
