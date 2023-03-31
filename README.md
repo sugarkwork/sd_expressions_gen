@@ -80,3 +80,4 @@ If we were to create a game in which AI dynamically prepares scenarios and chara
  - Automatically create a face mask image (mask.png) from an image for ControlNet.
  - Create a costume change sample.
  - Make it an extension of the web UI.
+ - Randomly select an image to use for ControlNet.
