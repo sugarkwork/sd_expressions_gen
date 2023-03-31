@@ -66,3 +66,7 @@ If you prepare a pose image (cn.png) for ControlNet and a face mask (mask.png), 
 ## facial expressions sample
 
 https://ai.sugar-knight.com/aitest/ex.html
+
+## future plans
+ - Automatically create a face mask image (mask.png) from an image for ControlNet.
+ - Create a costume change sample.
