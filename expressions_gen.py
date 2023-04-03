@@ -27,15 +27,40 @@ class FaceGenerator:
         with open(filename, "rb") as file:
             return base64.b64encode(file.read()).decode("utf-8")
 
+    def get_controlnet_models(self, model_filter=None):
+        response = requests.get(url=f"{self.base_url}/controlnet/model_list")
+        model_list = response.json()["model_list"]
+        if not model_filter:
+            return model_list
+        else:
+            return [item for item in model_list if model_filter in item]
+
+    def get_checkpoint_models(self, model_filter=None):
+        response = requests.get(url=f"{self.base_url}/sdapi/v1/sd-models")
+        model_list = response.json()
+        if not model_filter:
+            return model_list
+        else:
+            return [item for item in model_list if model_filter in item.get('title')]
+
+    def refresh_checkpoints(self):
+        response = requests.post(url=f"{self.base_url}/sdapi/v1/refresh-checkpoints")
+
+    def set_checkpoints(self, checkpoints, vae):
+        payload = {
+            "sd_model_checkpoint": checkpoints,
+            "sd_vae": vae
+        }
+        response = requests.post(url=f"{self.base_url}/sdapi/v1/options", json=payload)
+
     def generate_face(self, expression, mode="t2i", init_img=None, control_img=None):
         if not control_img:
-            control_img = self.base64_file("cn.png")
+            control_img = self.base64_file(config["controlnet_base"])
         else:
             control_img = self.base64_image(control_img)
 
         payload = {
-            "sd_model": config["sd_model"],
-            "prompt": expression + self.base_prompt,
+            "prompt": f"{expression}, {self.base_prompt}",
             "negative_prompt": "(worst quality, low quality:1.4), nsfw, nipples, pussy",
             "sampler_name": "DPM++ SDE Karras",
             "steps": 15,
@@ -53,16 +78,16 @@ class FaceGenerator:
                 {
                     "input_image": control_img,
                     "module": "openpose",
-                    "model": config["openpose_model"],
+                    "model": self.get_controlnet_models('openpose')[0],
                     "weight": 1
                 }
             ],
         }
 
         if mode == "i2i":
-            payload["controlnet_units"][0].update({
+            payload["controlnet_units"].append({
                 "module": "canny",
-                "model": config["i2i_model"],
+                "model": self.get_controlnet_models('canny')[0],
                 "weight": 0.8
             })
 
@@ -80,7 +105,7 @@ class FaceGenerator:
 
     @staticmethod
     def create_blurred_image(img):
-        mask = Image.open("mask.png").convert("L")
+        mask = Image.open(config["mask"]).convert("L")
         blurred = img.filter(ImageFilter.GaussianBlur(radius=20))
         result = Image.composite(img, blurred, mask)
         return result
@@ -88,16 +113,19 @@ class FaceGenerator:
 
 def main():
     output_dir = SCRIPT_DIR
-    if (os.path.isabs(config["output_dir"])):
+    if os.path.isabs(config["output_dir"]):
         output_dir = config["output_dir"]
     else:
         output_dir = os.path.join(SCRIPT_DIR, config["output_dir"])
     os.makedirs(output_dir, exist_ok=True)
 
-    base_prompt = ", 1girl, tareme, blonde hair, ponytail, blue eyes, masterpiece, high quality, cute, "\
-                  "highres, delicate, beautiful detailed, finely detailed, front light, " \
-                  "white background, standing, sfw, looking at viewer, (upper body:1.1)"
+    base_prompt = config["prompt"]
+
     face_generator = FaceGenerator(base_prompt=base_prompt)
+    face_generator.refresh_checkpoints()
+    sd_model = face_generator.get_checkpoint_models(config["sd_model"])[0]['title']
+    face_generator.set_checkpoints(sd_model, config["sd_vae"])
+
     new_img = face_generator.generate_face("expressionless")
     new_img.save(f"{output_dir}/expressionless.png")
 
@@ -128,7 +156,8 @@ def main():
         'kiss': '(kiss:1.1), (closed eyes:1.3)',
         'ahegao soft': '(ahegao:1.2), blush, (tongue out:1.1), open mouth, sweat',
         'ahegao hard': '(ahegao:1.2), blush, (tongue out:1.1), open mouth, sweat, rolling eyes',
-        'ahegao with heart': '(ahegao:1.2), blush, (tongue out:1.1), open mouth, sweat, heart-shaped pupils, heart-shaped eyes',
+        'ahegao with heart': '(ahegao:1.2), blush, (tongue out:1.1), open mouth, sweat, heart-shaped pupils, '
+                             'heart-shaped eyes',
         'wink': 'one eye closed',
         'get drunk': 'blush, open mouth, sweat',
     }
