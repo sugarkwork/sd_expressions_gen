@@ -42,12 +42,12 @@ python expressions_gen.py
 
 ## code
 
-Define the base_prompt variable to specify the fundamental prompt for the character. You can use StableDiffusion-defined components such as LoRA and embeddings.
+Specify the base prompt in prompt in setting.yaml. You can use components defined in StableDiffusion, such as LoRA and Embedding.
 
 ```
-    base_prompt = ", 1girl, tareme, blonde hair, ponytail, blue eyes, masterpiece, high quality, cute, "\
-                  "highres, delicate, beautiful detailed, finely detailed, front light, " \
-                  "white background, standing, sfw, looking at viewer, (upper body:1.1),
+prompt: "1girl, tareme,  pink hair, twintails, red eyes, hime cut, masterpiece, high quality, 
+cute, highres, delicate, beautiful detailed, finely detailed, front light, white background, 
+standing, sfw, looking at viewer, (upper body:1.1)"
 ```
 
 All information such as the step number is stored in the payload variable.
