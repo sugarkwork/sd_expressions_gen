@@ -23,7 +23,7 @@ Open a command line.
 Install the required modules as follows:
 
 ```
-pip install requests pillow
+pip install requests pillow PyYAML
 ```
 
 git clone.
