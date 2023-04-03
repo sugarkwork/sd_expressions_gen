@@ -40,9 +40,9 @@ It saves a file for each facial expression of the character.
 python expressions_gen.py
 ```
 
-## code
+## config
 
-Specify the base prompt in prompt in setting.yaml. You can use components defined in StableDiffusion, such as LoRA and Embedding.
+Specify the base prompt in prompt in config.yaml. You can use components defined in StableDiffusion, such as LoRA and Embedding.
 
 ```
 prompt: "1girl, tareme,  pink hair, twintails, red eyes, hime cut, masterpiece, high quality, 
