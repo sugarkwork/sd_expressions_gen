@@ -2,10 +2,15 @@ import base64
 import io
 import requests
 from PIL import Image, ImageFilter
+import os
+import yaml
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+config = yaml.safe_load(open(os.path.join(SCRIPT_DIR, "config.yaml"), "r"))
 
 
 class FaceGenerator:
-    def __init__(self, base_url="http://127.0.0.1:7860", base_prompt="1girl"):
+    def __init__(self, base_url=config["base_url"], base_prompt="1girl"):
         self.base_url = base_url
         self.base_prompt = base_prompt
 
@@ -29,7 +34,7 @@ class FaceGenerator:
             control_img = self.base64_image(control_img)
 
         payload = {
-            "sd_model": "anythingV5Anything_anythingV5PrtRE.safetensors",
+            "sd_model": config["sd_model"],
             "prompt": expression + self.base_prompt,
             "negative_prompt": "(worst quality, low quality:1.4), nsfw, nipples, pussy",
             "sampler_name": "DPM++ SDE Karras",
@@ -48,7 +53,7 @@ class FaceGenerator:
                 {
                     "input_image": control_img,
                     "module": "openpose",
-                    "model": "control_sd15_openpose [fef5e48e]",
+                    "model": config["openpose_model"],
                     "weight": 1
                 }
             ],
@@ -57,7 +62,7 @@ class FaceGenerator:
         if mode == "i2i":
             payload["controlnet_units"][0].update({
                 "module": "canny",
-                "model": "control_sd15_canny [fef5e48e]",
+                "model": config["i2i_model"],
                 "weight": 0.8
             })
 
@@ -69,7 +74,8 @@ class FaceGenerator:
         result = response.json()
 
         for i in result["images"]:
-            image = Image.open(io.BytesIO(base64.b64decode(i.split(",", 1)[0])))
+            image = Image.open(io.BytesIO(
+                base64.b64decode(i.split(",", 1)[0])))
             return image
 
     @staticmethod
@@ -81,12 +87,19 @@ class FaceGenerator:
 
 
 def main():
+    output_dir = SCRIPT_DIR
+    if (os.path.isabs(config["output_dir"])):
+        output_dir = config["output_dir"]
+    else:
+        output_dir = os.path.join(SCRIPT_DIR, config["output_dir"])
+    os.makedirs(output_dir, exist_ok=True)
+
     base_prompt = ", 1girl, tareme, blonde hair, ponytail, blue eyes, masterpiece, high quality, cute, "\
                   "highres, delicate, beautiful detailed, finely detailed, front light, " \
                   "white background, standing, sfw, looking at viewer, (upper body:1.1)"
     face_generator = FaceGenerator(base_prompt=base_prompt)
     new_img = face_generator.generate_face("expressionless")
-    new_img.save("expressionless.png")
+    new_img.save(f"{output_dir}/expressionless.png")
 
     blurred_img = face_generator.create_blurred_image(new_img)
 
@@ -130,7 +143,7 @@ def main():
             control_img=blurred_img,
         )
         result = Image.composite(blurred_img, img, mask)
-        result.save(f"{expression}.png")
+        result.save(f"{output_dir}/{expression}.png")
 
 
 if __name__ == "__main__":
