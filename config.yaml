@@ -1,5 +1,9 @@
 base_url: "http://127.0.0.1:7860"
-sd_model: "anythingV5Anything_anythingV5PrtRE.safetensors"
-openpose_model: "control_sd15_openpose [fef5e48e]"
-i2i_model: "control_sd15_canny [fef5e48e]"
+sd_model: "anythingV5Anything_anythingV5PrtRE"
+sd_vae: "None"
 output_dir: "./output"
+controlnet_base: "cn.png"
+mask: "mask.png"
+prompt: "1girl, tareme,  pink hair, twintails, red eyes, hime cut, masterpiece, high quality, 
+cute, highres, delicate, beautiful detailed, finely detailed, front light, white background, 
+standing, sfw, looking at viewer, (upper body:1.1)"
